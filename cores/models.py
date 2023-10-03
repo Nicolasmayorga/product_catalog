@@ -23,3 +23,6 @@ class Product(models.Model):
 class ProductView(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     view_count = models.IntegerField(default=0)
+    
+    class Meta:
+        unique_together = ('product',)

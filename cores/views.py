@@ -18,10 +18,18 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
-class ProductViewListView(generics.ListCreateAPIView):
+class ProductDetailView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
+    def get(self, request, *args, **kwargs):
+        product = self.get_object()
+        ProductView.objects.create(product=product) # Incrementa view count
+        return super().get(request, *args, **kwargs)
+
+class ProductAnalyticsView(generics.ListAPIView):
     queryset = ProductView.objects.all()
     serializer_class = ProductViewSerializer
     
-class ProductViewDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = ProductView.objects.all()
-    serializer_class = ProductViewSerializer
+    def get_queryset(self):
+        return super().get_queryset().order_by('-view_count')

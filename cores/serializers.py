@@ -11,8 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User 
         fields = ['id', 'username', 'email', 'is_admin']
         
-# serializer para porduct ProductView
+        
 class ProductViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductView
-        fields = '__all__'
+        fields = ['id', 'product', 'view_count']
