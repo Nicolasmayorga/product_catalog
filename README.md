@@ -71,11 +71,17 @@ Cuando hay un cambio en algún producto, el sistema tiene la capacidad de enviar
 
 ## Deuda Técnica y Próximos Desarrollos:
 
-El proyecto está en constante evolución y hay varios desarrollos y mejoras planificadas para el futuro, incluyendo:
+Mientras se desarrollaba este proyecto, surgieron ideas y funcionalidades que se consideraron importantes, pero que aún no se han implementado. Estas son algunas de las tareas y mejoras pendientes:
 
-- **Dockerizar la Aplicación:** Para facilitar despliegues y asegurar consistencia entre ambientes.
-- **Tareas Automatizadas con Lambdas de AWS:** Optimizar procesos recurrentes y automatizar tareas en la nube.
-- **Sistema con Celery para Correos:** Para manejar grandes volúmenes de correos, especialmente en escenarios de alto tráfico, planeamos implementar Celery. Esto permitirá que las notificaciones de cambios de productos se coloquen en una cola y se envíen de forma asincrónica, evitando tiempos de espera para el usuario y garantizando la entrega.
+- **Dockerización:** Implementar Docker para asegurar que el entorno de desarrollo sea replicable y evitar problemas de dependencias.
+
+- **Tareas Automatizadas con Lambdas de AWS:** Se desea agregar tareas automatizadas que se ejecuten en función de eventos específicos, utilizando Lambdas de AWS.
+
+- **Sistema de Correos con Celery:** Debido al potencial tráfico y demanda, es esencial implementar un sistema que maneje el envío de correos de manera asíncrona. La idea es utilizar Celery para esta tarea y asegurar que, en caso de cambios en productos, se envíen notificaciones por correo sin demoras ni interrupciones en el servicio principal.
+
+- **Makefile:** Con el objetivo de automatizar y simplificar tareas repetitivas en el desarrollo (como tests, migraciones, entre otros), se considera esencial la creación de un `Makefile`.
+
+- **Coverage:** Para asegurar la calidad del código y la correcta funcionalidad de todas las partes del sistema, se desea implementar `coverage` y monitorear el porcentaje de código que está siendo probado.
 
 
 ## Contribuciones:
