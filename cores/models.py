@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.core.mail import send_mail
 
 
 class User(AbstractUser):
@@ -16,7 +17,7 @@ class User(AbstractUser):
         related_name='custom_user_permissions_set',
         blank=True
     )
-    
+
     def save(self, *args, **kwargs):
         if self.is_superuser:
             self.is_admin = True
@@ -32,7 +33,24 @@ class Product(models.Model):
     def has_changed(self, old_instance):
         if not old_instance:
             return True
-        return old_instance.sku != self.sku or old_instance.name != self.name or old_instance.price != self.price or old_instance.brand != self.brand
+        return (old_instance.sku != self.sku or 
+                old_instance.name != self.name or 
+                old_instance.price != self.price or 
+                old_instance.brand != self.brand)
+
+    def save(self, *args, **kwargs):
+            if self.pk:
+                original = Product.objects.get(pk=self.pk)
+                if self.has_changed(original):
+                    send_mail(
+                        'Producto modificado',
+                        f'El producto {self.name} ha sido modificado.',
+                        'from@example.com',
+                        ['to@example.com'],  
+                        fail_silently=False,
+                    )
+
+            super().save(*args, **kwargs)
 
 
 class ProductView(models.Model):
