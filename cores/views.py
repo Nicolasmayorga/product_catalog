@@ -22,14 +22,15 @@ def login(request):
     else:
         return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
 
+
 class ProductListView(generics.ListCreateAPIView):
-    permission_classes = [permissions.IsAdminUser] 
+    permission_classes = [permissions.IsAdminUser]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
-class ProductDetailView(generics.RetrieveUpdateAPIView):
-    permission_classes = [permissions.IsAdminUser] 
+class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAdminUser]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
@@ -59,4 +60,4 @@ class ProductAnalyticsView(generics.ListAPIView):
     serializer_class = ProductViewSerializer
 
     def get_queryset(self):
-        return super().get_queryset().order_by('view_count')
+        return super().get_queryset().order_by('-view_count')

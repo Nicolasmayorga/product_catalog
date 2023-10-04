@@ -16,6 +16,11 @@ class User(AbstractUser):
         related_name='custom_user_permissions_set',
         blank=True
     )
+    
+    def save(self, *args, **kwargs):
+        if self.is_superuser:
+            self.is_admin = True
+        super().save(*args, **kwargs)
 
 
 class Product(models.Model):
