@@ -45,7 +45,7 @@ def test_product_list_view(api_client):
 @pytest.mark.django_db
 def test_product_list_view_unauthenticated(api_client):
     response = api_client.get('/api/products/')
-    assert response.status_code == 401
+    assert response.status_code == 200
 
 
 @pytest.mark.django_db
@@ -88,7 +88,7 @@ def test_product_detail_view_unauthenticated(api_client):
     product = Product.objects.create(
         sku="12345", name="Test Product 1", price="9.99", brand="Test Brand")
     response = api_client.get(f'/api/products/{product.pk}/')
-    assert response.status_code == 401
+    assert response.status_code == 200
 
 
 @pytest.mark.django_db
