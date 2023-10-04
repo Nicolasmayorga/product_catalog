@@ -1,0 +1,30 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Django
+*.log
+*.pot
+*.db
+db.sqlite3
+
+# Environments
+.env
+.venv/
+*.venv/
+*.virtualenv/
+virtualenv/
+*.virtualenvs/
+.venv/
+
+# IDE specific
+*.idea/
+*.vscode/
+*.swp
+*.swo
+*.swn
+
+# OS specific
+.DS_Store
+Thumbs.db
